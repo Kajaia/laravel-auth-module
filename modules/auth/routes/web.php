@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\auth\app\Http\Controllers\LoginController;
 use Modules\auth\app\Http\Controllers\LogoutController;
+use Modules\auth\app\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::middleware('guest')->group(function() {
 
     // Register
     Route::view('/register', 'auth::auth.register')->name('auth.register');
+    Route::post('/register', RegisterController::class)->name('register');
 });
 
 Route::middleware('auth')->group(function() {

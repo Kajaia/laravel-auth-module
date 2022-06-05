@@ -29,6 +29,7 @@
             <label class="form-check-label" for="remember">Remember me</label>
         </div>
         <button type="submit" class="btn btn-primary px-4 shadow-sm">Login</button>
+        <a href="{{ route('register') }}" class="btn btn-link px-4 text-decoration-none">Register</a>
     </form>
 </div>
 @endsection
