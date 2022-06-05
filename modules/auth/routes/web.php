@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\auth\app\Http\Controllers\LoginController;
+use Modules\auth\app\Http\Controllers\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,5 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/login', 'auth::auth.login');
-Route::view('/register', 'auth::auth.register');
+Route::middleware('guest')->group(function() {
+    // Login
+    Route::view('/login', 'auth::auth.login')->name('auth.login');
+    Route::post('/login', LoginController::class)->name('login');
+
+    // Register
+    Route::view('/register', 'auth::auth.register')->name('auth.register');
+});
+
+Route::middleware('auth')->group(function() {
+    // Logout
+    Route::post('/logout', LogoutController::class)->name('logout');
+
+    // Dashboard
+    Route::view('/dashboard', 'auth::index')->name('dashboard');
+});

@@ -4,7 +4,7 @@ namespace Modules\auth\app\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AuthModuleServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
     public function register()
     {
