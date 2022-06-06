@@ -4,17 +4,13 @@ namespace Modules\auth\app\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Modules\auth\app\Actions\LogoutAction;
 
 class LogoutController extends BaseController
 {
     public function __invoke(Request $request)
     {
-        Auth::logout();
-        
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
+        (new LogoutAction)($request);
 
         return redirect()->route('login');
     }
