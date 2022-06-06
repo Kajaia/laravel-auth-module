@@ -1,6 +1,7 @@
 @extends('auth::layouts.app')
 
 @section('content')
+@include('auth::layouts.message')
 <div class="col-md-6">
     <div class="card shadow-sm border-0 rounded-3">
         <div class="card-header border-light d-flex align-items-center justify-content-between">

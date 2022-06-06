@@ -3,6 +3,7 @@
 namespace Modules\auth\app\Actions;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Modules\auth\app\Http\Requests\RegisterRequest;
 
@@ -20,6 +21,8 @@ class RegisterUserAction
         ]);
 
         auth()->login($user);
+
+        event(new Registered($user));
     }
 
 }
