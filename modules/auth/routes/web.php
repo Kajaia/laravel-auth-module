@@ -5,6 +5,7 @@ use Modules\auth\app\Http\Controllers\EmailVerificationController;
 use Modules\auth\app\Http\Controllers\LoginController;
 use Modules\auth\app\Http\Controllers\LogoutController;
 use Modules\auth\app\Http\Controllers\RegisterController;
+use Modules\auth\app\Http\Controllers\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,17 @@ Route::middleware('guest')->group(function() {
     // Register
     Route::view('/register', 'auth::auth.register')->name('auth.register');
     Route::post('/register', RegisterController::class)->name('register');
+
+    // Password request
+    Route::view('/forgot-password', 'auth::auth.forgot-password')
+        ->name('password.request');
+    Route::post('/forgot-password', [ResetPasswordController::class, 'request'])
+        ->name('password.email');
+    // Password reset
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'reset'])
+        ->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'update'])
+        ->name('password.update');
 });
 
 Route::middleware('auth')->group(function() {

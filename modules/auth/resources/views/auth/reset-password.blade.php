@@ -1,10 +1,10 @@
 @extends('auth::layouts.app')
 
 @section('content')
-@include('auth::layouts.message')
 <div class="col-12 col-md-6 col-lg-4">
-    <form action="{{ route('login') }}" method="POST">
+    <form action="{{ route('password.update') }}" method="POST">
         @csrf
+        <input type="hidden" name="token" value="{{ $token }}">
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
             <input type="email" name="email" class="form-control shadow-sm @error('email') is-invalid @enderror" id="email" autofocus>
@@ -16,7 +16,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">New password</label>
             <input type="password" name="password" class="form-control shadow-sm @error('password') is-invalid @enderror" id="password">
 
             @error('password')
@@ -25,15 +25,17 @@
             </div>
             @enderror
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" name="remember" class="form-check-input shadow-sm" id="remember">
-            <label class="form-check-label" for="remember">Remember me</label>
+        <div class="mb-3">
+            <label for="password_confirmation" class="form-label">Confirm password</label>
+            <input type="password" name="password_confirmation" class="form-control shadow-sm @error('password_confirmation') is-invalid @enderror" id="password_confirmation">
+
+            @error('password_confirmation')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
-        <button type="submit" class="btn btn-primary px-4 shadow-sm">Login</button>
-        <a href="{{ route('register') }}" class="btn btn-link px-4 text-decoration-none">Register</a>
-        <div class="text-start">
-            <a href="{{ route('password.request') }}" class="btn btn-link px-0">Forgot password?</a>
-        </div>
+        <button type="submit" class="btn btn-primary px-4 shadow-sm">Save</button>
     </form>
 </div>
 @endsection
